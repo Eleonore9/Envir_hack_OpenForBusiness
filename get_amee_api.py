@@ -19,23 +19,20 @@ def get_amee_data(res_limit=100, city='London', min_employees=100):
     else:
         print 'Error: status code ', r.status_code
 
+        
 def filter_sustainability(json_data):
     '''Filters data and creates a json dump'''
-    d, companies, amee_scores, lat, lon = {}, [], [], [], []
-    sustainability_report_url, line_of_business  = [], []
-    employees_total = []
+    data = []
     for j in json_data['companies']:
         if j.get('amee_industry_score'):
-            companies.append(j.get('name'))
-            amee_scores.append(j.get('amee_industry_score'))
-            lat.append(j.get('lat'))
-            lon.append(j.get('lon'))
-            line_of_business.append(j.get('line_of_business'))
-            employees_total.append(j.get('employees_total'))
-            sustainability_report_url.append(j.get('sustainability_report_url'))
-    d['companies'], d['amee_scores'], d['lat'], d['lon'] = companies, amee_scores, lat, lon
-    d['sustainability_report_url'] = sustainability_report_url 
-    d['line_of_business'], d['employees_total'] = line_of_business, employees_total
+            data.append({'name' : j.get('name'),
+                         'amee_industry_score' : j.get('amee_industry_score'),
+                         'line_of_business' : j.get('line_of_business'),
+                         'employees_total' : j.get('employees_total'),
+                         'sustainability_report_url' : j.get('sustainability_report_url'),
+                         'lat' : j.get('lat'),
+                         'lon' : j.get('lon')})
+    d = {'data' : data}
     return json.dumps(d)
 
 
