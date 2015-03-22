@@ -8,13 +8,14 @@ body {
 
 #map {
     width: 49%;
+    height: 450px;
    /* clear: both;*/
 }
 
 #board {
     width: 49%;
     margin-right: 2%;
-    height: 600px;
+    height: 450px;
     float: left;
     background-color:#E1E6F2;
 }

@@ -1,4 +1,4 @@
-var colors = ["red", "orange", "yellow", "green"];
+var colors = ["#C66D6D", "#E09E69", "#F7EF9E", "#59A372"];
 
 $( document ).ready(function() {
   console.log( "ready!" );
@@ -9,7 +9,7 @@ $( document ).ready(function() {
   var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
   }).addTo(map);
-  map.setView([51.5020, -0.1239], 12);
+  map.setView([51.5020, -0.1239], 11);
 
   //Add the points on Ajax call:
   $('button').on('click', function() {
@@ -36,7 +36,7 @@ $( document ).ready(function() {
 	  var circle = L.circle(coord, 300, {
 	    color: 'grey',
 	    fillColor: colors[score_color],
-	    fillOpacity: 0.5
+	    fillOpacity: 0.7
 	  }).addTo(map);
 	  
 	  var popup = L.popup()
@@ -73,7 +73,11 @@ $( document ).ready(function() {
          })
          .attr("height", function(d){
              return d * 6;
-         }).attr("fill", "teal")
+         }).attr("fill", function(d, i){
+	    if (d<25){return colors[0];} else if (d<50){return colors[1];}
+	    else if (d<75){return colors[2];} else {return colors[3]}
+	 });//.attr("fill", "teal")
+	
 
      svg.selectAll("text")
          .data(list_scores)
