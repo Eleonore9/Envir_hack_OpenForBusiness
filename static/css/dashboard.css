@@ -7,15 +7,36 @@ body {
 }
 
 #map {
-    width: 50%;
+    width: 49%;
+   /* clear: both;*/
 }
 
 #board {
-    width: 50%;
-    height: 400px;
+    width: 49%;
+    margin-right: 2%;
+    height: 600px;
     float: left;
     background-color:#E1E6F2;
 }
 
+.data {
+    
+}
+
+#extra {
+    clear: both;
+}
+
 .get_data button {
     margin: 2% 0 0 5%;
+
+}
+
+.green {
+    background-color: #82BCA1;
+}
+
+svg {
+    margin: 0 0 0 62%;
+
+}
