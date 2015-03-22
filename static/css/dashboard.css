@@ -1,0 +1,21 @@
+body {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+
+#map {
+    width: 50%;
+}
+
+#board {
+    width: 50%;
+    height: 400px;
+    float: left;
+    background-color:#E1E6F2;
+}
+
+.get_data button {
+    margin: 2% 0 0 5%;

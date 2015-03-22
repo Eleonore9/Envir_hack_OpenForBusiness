@@ -11,15 +11,27 @@ $( document ).ready(function() {
 
   //Add the points on Ajax call:
   $('button').on('click', function() {
+    $(".display_data.table").append("<thead><tr><th>#</th><th>Company</th><th>Score</th></tr></tr></thead>");
     $.getJSON('/api/companies/sustainability/', function(data){
       $.each(data, function(index, element){
+	console.log(element);
 	for(i=0; i<element.length; i++){
 	  var coord = [element[i]['lat'], element[i]['lon']];
+	  
+	  $(".display_data.table").append("<tr>" + element[i]['name'] + "</tr>");
+	  
 	  var circle = L.circle(coord, 300, {
 	    color: 'green',
 	    fillColor: '#449559',
 	    fillOpacity: 0.5
 	  }).addTo(map);
+	  
+	  var popup = L.popup()
+	      .setLatLng(coord)
+	      .setContent('<p>Company: '+ element[i]['name'] +'</p>')
+	      .openOn(map);
+	  
+	  circle.bindPopup(popupContent).openPopup();
 	}
       })
     })

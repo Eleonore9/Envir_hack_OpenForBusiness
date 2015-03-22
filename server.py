@@ -6,9 +6,12 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 @app.route('/api/companies/sustainability/')
 def json_sustainability():
-    # get arguments to customize the api call
     api_call = amee.get_amee_data()
     json_data = amee.filter_sustainability(api_call)
     print json_data

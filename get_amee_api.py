@@ -15,6 +15,8 @@ def get_amee_data(res_limit=200, city='London', min_employees=100):
     r = requests.get(url, auth=HTTPBasicAuth(api_key, api_secret))
     if r.status_code == 200:
         json_data = r.json()
+        #with open('data.txt', 'w') as outfile:
+            #json.dump(json_data, outfile)
         return json_data
     else:
         print 'Error: status code ', r.status_code
@@ -35,23 +37,23 @@ def filter_sustainability(json_data):
     d = {'data' : data}
     return json.dumps(d)
 
-def filter_emissions(json_data):
-    '''Filters data and creates a json dump'''
-    data = []
-    for j in json_data['companies']:
-        if j.get('waste_hazardous '):
-            data.append({'name' : j.get('name'),
-                         'waste_hazardous ' : j.get('waste_hazardous'),
-                         'line_of_business' : j.get('line_of_business'),
-                         'employees_total' : j.get('employees_total'),
-                         'sustainability_report_url' : j.get('sustainability_report_url'),
-                         'lat' : j.get('lat'),
-                         'lon' : j.get('lon')})
-            d = {'data' : data}
-            return json.dumps(d)
+# def filter_emissions(json_data):
+#     '''Filters data and creates a json dump'''
+#     data = []
+#     for j in json_data['companies']:
+#         if j.get('waste_hazardous '):
+#             data.append({'name' : j.get('name'),
+#                          'waste_hazardous ' : j.get('waste_hazardous'),
+#                          'line_of_business' : j.get('line_of_business'),
+#                          'employees_total' : j.get('employees_total'),
+#                          'sustainability_report_url' : j.get('sustainability_report_url'),
+#                          'lat' : j.get('lat'),
+#                          'lon' : j.get('lon')})
+#             d = {'data' : data}
+#             return json.dumps(d)
 
 
 if __name__ == '__main__':
     d = get_amee_data()
     ##print filter_sustainability(d)
-    print filter_emissions(d)
+
