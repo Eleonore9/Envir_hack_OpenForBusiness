@@ -17,14 +17,14 @@ $( document ).ready(function() {
     $.getJSON('/api/companies/sustainability/', function(data){
       $.each(data, function(index, element){
 	//console.log(element);
-	$(".display_data").append("<h3>"+element.length+" results</h3>");
+	$(".display_data h4 span").append(element.length);
 	var list_scores = [];
 	for(i=0; i<element.length; i++){
 	  console.log(i, element[i]['name']);
 	  
 	  var coord = [element[i]['lat'], element[i]['lon']];
 	  var count = i + 1;
-	  $(".display_data").append("<h4>"+count+'- '+element[i]['name']+' - Score: '+element[i]['amee_industry_score']+" </h4>");
+	  $(".display_data .table_data").append("<p>"+count+'- '+element[i]['name']+' - Score: '+element[i]['amee_industry_score']+" </p>");
 
 	  var score = element[i]['amee_industry_score'];
 	  list_scores.push(score);
