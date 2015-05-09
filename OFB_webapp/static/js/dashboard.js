@@ -1,7 +1,6 @@
 var colors = ["#C66D6D", "#E09E69", "#F7EF9E", "#59A372"];
 
 $( document ).ready(function() {
-  console.log( "ready!" );
   
   // Create the map:
   L.mapbox.accessToken = 'pk.eyJ1IjoiZWxlb25vcmU5IiwiYSI6IllEQXdyRmcifQ.LG2FsrbRgNy4vSS9DnzKiw';
@@ -16,37 +15,40 @@ $( document ).ready(function() {
     
     $.getJSON('/api/companies/sustainability/', function(data){
       $.each(data, function(index, element){
-	//console.log(element);
+	console.log(element);
 	$(".display_data h4 span").append(element.length);
 	var list_scores = [];
 	for(i=0; i<element.length; i++){
-	  console.log(i, element[i]['name']);
-	  
-	  var coord = [element[i]['lat'], element[i]['lon']];
-	  var count = i + 1;
-	  $(".display_data .table_data").append("<p>"+count+'- '+element[i]['name']+' - Score: '+element[i]['amee_industry_score']+" </p>");
+	  //console.log(i, element[i]['name']);
+	  if(element[i]['name'] != undefined){
+	    var coord = [element[i]['lat'], element[i]['lon']];
+	    var count = i + 1;
+	    $(".display_data .table_data").append("<p>"+count+'- '+element[i]['name']+' - Score: '+element[i]['amee_industry_score']+" </p>");
 
-	  var score = element[i]['amee_industry_score'];
-	  list_scores.push(score);
-	  var score_color;
-	  if (score<25){score_color = 0;} else if (score<50){score_color=1;}
-	  else if (score<75){score_color=2;} else {score_color=3;}
+	    //add color depending on score level
+	    var score = element[i]['amee_industry_score'];
+	    list_scores.push(score);
+	    var score_color;
+	    if (score<25){score_color = 0;} else if (score<50){score_color=1;}
+	    else if (score<75){score_color=2;} else {score_color=3;}
 	  
-	  
-	  var circle = L.circle(coord, 300, {
-	    color: 'grey',
-	    fillColor: colors[score_color],
-	    fillOpacity: 0.7
-	  }).addTo(map);
-	  
-	  var popup = L.popup()
+	    var circle = L.circle(coord, 300, {
+	      color: 'grey',
+	      fillColor: colors[score_color],
+	      fillOpacity: 0.7
+	    }).addTo(map);
+
+	    //add popups with info
+	    var popup = L.popup()
 	      .setLatLng(coord)
 	      //.setContent('<p>Company: '+ element[i]['name'] +'</p>')
 	      .openOn(map);
-	  var popupContent = '<p>Company: '+ element[i]['name'] +'</p>'+'<p>Score: '+ element[i]['amee_industry_score'] +'</p>';
-	  circle.bindPopup(popupContent).openPopup();
+	    var popupContent = '<p>Company: '+ element[i]['name'] +'</p>'+'<p>Score: '+ element[i]['amee_industry_score'] +'</p>';
+	    circle.bindPopup(popupContent).openPopup();
+
+	  }
 	}
-	console.log(list_scores);
+	//console.log(list_scores);
 	//Width and height
       var w = 300;
       var h = 180;

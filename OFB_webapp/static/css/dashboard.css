@@ -36,16 +36,18 @@ body {
 }
 
 #board .filters {
+    padding: 1% 0 1% 2%;
     float: left;
     background-color: #C0CAD6;
     width: 45%;
     height: 150px;
     margin: 0 0 1% 1.5%;
+    color: #64707F;
 }
 
 #board #hist {
     float: right;
-    background-color: #D2D7DD ;
+    /*background-color: #D2D7DD ;*/
     width: 49%;
     height: 150px;
     margin: 0 1% 1% 0;
@@ -56,7 +58,7 @@ body {
     width: 49%;
     height: 450px;
     float: right;
-    margin: 3.5% 1% 2% 0;
+    margin: 5% 1% 2% 0;
 }
 
 #extra {
@@ -67,7 +69,7 @@ body {
     background-color: #82BCA1;
 }
 
-svg {
-    margin: 0 0 20% 2%;
+#hist svg {
+    margin: -5.3% 0 0 2%;
 
 }

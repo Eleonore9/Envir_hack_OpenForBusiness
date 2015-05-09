@@ -9,7 +9,7 @@ api_key = '76f715aa0bd101c29c550c11b598f819'
 api_secret = '4a1a1d477855bef04543c6d92a22bcef'
 
 ## Query AMEE api for companies info:
-def get_amee_data(res_limit=2000, min_employees=10):
+def get_amee_data(res_limit=20, min_employees=10):
     '''Returns json data from call to amee api.'''
     url_api = 'http://www.amee.com/api/companies?'
     r, e = str(res_limit), '&min_employees=' + str(min_employees)
